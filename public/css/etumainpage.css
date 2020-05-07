@@ -1,0 +1,11 @@
+html,body {
+    margin: 0;
+
+}
+
+.back{ 
+    background-image: url('../image/laptop.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

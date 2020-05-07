@@ -1,3 +1,28 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+   path: /home
+   controller: App\Controller\controler::loadhomepage
+  
+ensmainpage:
+   path: /ens
+   controller:  App\Controller\controler::loadensmainpage
+
+register:
+   path: /register
+   controller: App\Controller\controler::loadregister
+new cours:
+   path: /newcours
+   controller: App\Controller\controler::loadnewcours   
+stats:
+   path: /statsens
+   controller: App\Controller\controler::loadstatsens
+etumainpage:
+   path: /etu
+   controller: App\Controller\controler::loadetumainpage
+newcoursetu:
+   path: /newcoursetu
+   controller: App\Controller\controler::loadnewcoursetu   
+statsetu:
+   path: /statsetu
+   controller: App\Controller\controler::loadstatsetu   
+
+

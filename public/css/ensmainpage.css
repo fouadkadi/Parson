@@ -1,0 +1,29 @@
+
+
+html,body {
+    margin: 0;
+
+}
+
+.back{ 
+    background-image: url('../image/laptop.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.floter{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.floter:hover{
+    bottom: 15px;
+    right: 15px;
+}
+
+.btn-costom
+    {
+       background-color: rgb(41, 133, 194);
+    }

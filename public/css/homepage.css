@@ -1,0 +1,64 @@
+html,body{
+    background-image: url('../image/login-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    }
+    
+    .container{
+    height: 100%;
+    align-content: center;
+    }
+    
+    .card{
+    height: 370px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.116) !important;
+    }
+    
+   
+    
+    .card-header h3{
+    color: white;
+    }
+    
+   
+    
+    .input-group-prepend span{
+    width: 50px;
+    background-color: rgb(41, 133, 194);
+    color: black;
+    border:0 !important;
+    }
+    
+    input:focus{
+    outline: 0 0 0 0  !important;
+    box-shadow: 0 0 0 0 !important;
+    
+    }
+    
+    
+    
+    .login_btn{
+    color: white;
+    background-color: rgb(41, 133, 194);
+    width: 100px;
+    border-width: medium;
+    border-color: rgb(41, 133, 194);
+    }
+
+    .register_btn{
+        background-color: white
+        }
+
+    .colornav{
+        background-color: rgba(3, 5, 7, 0.39);
+    }
+    
+    .btn-costom
+    {
+       background-color: rgb(41, 133, 194);
+    }
