@@ -1,14 +1,14 @@
 index:
    path: /home
    controller: App\Controller\controler::loadhomepage
-  
+register:
+   path: /register
+   controller: App\Controller\controler::loadregister
+
 ensmainpage:
    path: /ens
    controller:  App\Controller\controler::loadensmainpage
 
-register:
-   path: /register
-   controller: App\Controller\controler::loadregister
 new cours:
    path: /newcours
    controller: App\Controller\controler::loadnewcours   
@@ -24,5 +24,9 @@ newcoursetu:
 statsetu:
    path: /statsetu
    controller: App\Controller\controler::loadstatsetu   
+
+ajouteexe:
+   path: /addexe
+   controller: App\Controller\controler::addexe    
 
 

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class controler extends AbstractController
@@ -48,4 +50,19 @@ class controler extends AbstractController
         return $this->render('etu/statsetu.html.twig',['content' => ""]);
     }
     
+
+    // Partie  AJAX  
+
+    public function addexe(Request $request )
+    {   
+        if($request->isXmlHttpRequest())
+        {
+         
+            $data = $request->request->get('my_nodes');
+
+            return new JsonResponse($data);
+
+        }
+    }
+
 }

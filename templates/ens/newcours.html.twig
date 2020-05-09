@@ -65,8 +65,8 @@
   </div>
   <div class="card-body">
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-costom text-white">Ajouter un exercice</a>
-    <a href="#" class="btn btn-costom text-white">Consulter les exercices</a>
+    <a href="#" class="btn btn-costom text-white" data-toggle="modal" data-target="#addexercie" >Ajouter un exercice</a>
+    <a href="#" class="btn btn-costom text-white" data-toggle="modal" data-target="#listexercice">Consulter les exercices</a>
 
   </div>
 </div>
@@ -98,12 +98,17 @@
     
   </div>
 
+{# floating button to add cours#}
+
   <div class="floter">
   <button class="btn text-info" data-toggle="modal" data-target="#addcourspopup">
    <i class="fas fa-plus-circle fa-3x"></i>
      </button>
 
   </div>
+
+
+{# modal add cours #}
 
   <div class="modal fade " id="addcourspopup" tabindex="-1" role="dialog" aria-labelledby="addcourspopup" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -129,20 +134,239 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary">Sauvgarder</button>
+        <button type="button" class="btn text-white" style="background-color: rgb(41, 133, 194);">Sauvgarder</button>
       </div>
     </div>
   </div>
 </div>
 
 
+
+{# modal for exercice #}
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="listexercice" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+     <div class="modal-header">
+        <h5 class="w-100 modal-title text-center text-muted">Liste des exercice</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     {# Modal body #}
+<div class="modal-body">
+
+  {# exercice list #}
+ <div class="card mb-2" >
+   
+  <div class="card-body">
+    <h5 class="card-title text-center text-secondary">Exericice 1</h5>
+    
+<div class="card mb-1 bg-secondary">
+  <div class="card-body p-1">
+  <div class="d-flex justify-content-between align-items-center">
+  <p class="h5 mb-0 text-white"> int a=5 ;</p>
+  <p class=" h5 text-white mr-1 mb-0"> 1 </i></p>
+  </div>
+  </div>
+</div>  
+
+<div class="card mb-1 bg-secondary">
+  <div class="card-body p-1">
+  <div class="d-flex justify-content-between align-items-center">
+  <p class="h5 mb-0 text-white"> int a=5 ;</p>
+  <p class=" h5 text-white mr-1 mb-0"> 1 </i></p>
+  </div>
+  </div>
+</div>
+
+<div class="card mb-1 bg-secondary">
+  <div class="card-body p-1">
+  <div class="d-flex justify-content-between align-items-center">
+  <p class="h5 mb-0 text-white"> int a=5 ;</p>
+  <p class=" h5 text-white mr-1 mb-0"> 1 </i></p>
+  </div>
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+
+
+
+<div class="card mb-2" >
+   
+  <div class="card-body">
+    <h5 class="card-title text-center">Exericice 1</h5>
+    
+<div class="card mb-1 bg-secondary">
+  <div class="card-body p-1">
+  <div class="d-flex justify-content-between align-items-center">
+  <p class="h5 mb-0 text-white"> int a=5 ;</p>
+  <p class=" h5 text-white mr-1 mb-0"> 1 </i></p>
+  </div>
+  </div>
+</div>  
+
+<div class="card mb-1 bg-secondary">
+  <div class="card-body p-1">
+  <div class="d-flex justify-content-between align-items-center">
+  <p class="h5 mb-0 text-white"> int a=5 ;</p>
+  <p class=" h5 text-white mr-1 mb-0"> 1 </i></p>
+  </div>
+  </div>
+</div>
+
+<div class="card mb-1 bg-secondary">
+  <div class="card-body p-1">
+  <div class="d-flex justify-content-between align-items-center">
+  <p class="h5 mb-0 text-white"> int a=5 ;</p>
+  <p class=" h5 text-white mr-1 mb-0"> 1 </i></p>
+  </div>
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+  {# end exercice list #}
+        
+ </div>
+
+      {# end Modal body #}   
+      
+    </div>
+  </div>
+</div>
+{# end modal for exercice #}
+
+{# modal for add exercice #}
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="addexercie" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+     <div class="modal-header">
+        <h5 class="w-100 modal-title text-center text-muted">Liste des instructions</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+     {# Modal body #}
+<div class="modal-body" id="listins">
+
+  {# exercice list #}
+
+
+
+  {# end exercice list #}
+        
+ </div>
+      {# end Modal body #}   
+{# Modal footter #}
+  <div class="modal-footer justify-content-between ">
+        
+     <form class="form-inline my-2 my-lg-0 w-100">
+      <div class="form-group row w-100">
+    
+      <input class="form-control mx-sm-2 col-sm-8" type="text" id="instruction" placeholder="instruction">
+    
+
+      <input class="form-control mr-sm-2  col-sm-2" id="ordre" type="number" placeholder="ordre" >
+
+      <button class="btn btn-outline-info mr-2 ml-auto" type="button" id="addline">Ajouter</button>
+
+      </div>
+      <div class="form-group row w-100">
+            <button class="btn btn-outline-info mx-2 my-2 btn-block" type="button" id="valider">Valider</button>
+      </div>
+       <div class="form-group row w-100">
+            <button class="btn btn-outline-danger mx-2 my-2 btn-block" type="button" id="clear">Effacer</button>
+      </div>
+
+
+    </form>
+
+  </div>    
+  {# Modal footter  end#}
+
+      
+    </div>
+  </div>
+</div>
+{# end modal for add exercice #}
+
+
 {% endblock %}
 
 {% block javascripts %}
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+
+  $("#addline").click(function() {
+if($("#ordre").val()!='' && $("#instruction").val()!='')
+{ 
+  $("#listins").append('<div class="alert alert-secondary my-1"> <div class="row"> <div class="col-11">  <p class="mb-0 instru"> '
+                       +$("#instruction").val()
+                       +'</p> </div> <div class="col-1"> <p class="mb-0 rang"> '
+                       +$("#ordre").val()
+                       +'</p> </div> </div> </div>');
+  $("#ordre").val('');
+  $("#instruction").val('');                     
+  
+}
+else{ alert('vérifier vos champs');}
+
+});
+
+$("#clear").click(function() {
+$("#listins").empty();
+});
+
+$("#valider").click(function() {
+    var nodes=[];
+
+    $("#listins").children().each(function ( index) {
+    
+  
+    var rang= parseInt($(this).find('.rang').text());
+    var instru_text=$(this).find('.instru').text();
+    item={};
+    item["text"]=instru_text;
+    item["rang"]=rang;
+    item["pos"]=index+1;
+    nodes.push(item);
+    });
+
+    $.ajax({
+    type: "POST",
+    url: "/addexe",
+    data: {my_nodes:nodes},
+    success: function (data, dataType) {
+
+        console.log(data);
+        $("#ordre").val('');
+        $("#instruction").val('');
+    },
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert('Error : ' + errorThrown);
+         $("#ordre").val('');
+         $("#instruction").val('');
+    }
+   });
+
+    
+
+
+});
+  
+</script>
 
 {% endblock %}
     
