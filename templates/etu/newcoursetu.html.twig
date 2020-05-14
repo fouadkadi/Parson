@@ -22,6 +22,9 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <form method="POST">
+             <input type="hidden" name="id_etu" value="{{id_etu}}">
+
     <ul class="navbar-nav">
 
       <li class="nav-item ">
@@ -37,12 +40,13 @@
       </li>
 
       <li class="nav-item ">
-        <a class="nav-link" href="/statsetu">
+      <button type="submit" class="nav-link btn btn-link" formaction="/statsetu">
         <span><i class="fas fa-address-card"></i></span>
-        Résultats</a>
+        Résultats</button>
       </li>
 
     </ul>
+    </form>
 
     <form class="form-inline ml-auto mr-2 my-lg-0">
      <a class="nav-link text-white" href="/home" >
@@ -59,102 +63,68 @@
 
   <div class="card mt-2">
     <div class="card-body">
-      <h5 class="card-title text-muted text-center">VOS COURS SUIVIE</h5>
+      <h5 class="card-title text-muted text-center">VOS COURS SUIVIS</h5>
       {# card cours#}
        
-      
-
-        {#cour#}
-       <div class="card mb-1">
-       <h5 class="card-header text-center">Cours 1</h5>
+       {% for cours  in cours_suivie  %}
+         
+     <div class="card mb-1 shadow rounded">
+       <h5 class="card-header text-center">{{ cours.nom }}</h5>
        <div class="card-body">
-        <p class="card-text">discription</p>
+        <p class="card-text">{{ cours.contenu }}</p>
 
-{# liste des exeerccice#}
+          {% for exo in cours.exos  %}
+            
+            <div class="card mb-2 shadow-sm rounded">
+               <div class="card-body">
+                <p class="indexcours d-none">{{exo.id}}</p>
+                <h5 class="card-title">{{exo.titre}}</h5>
+                <p class="card-text">{{exo.contenu}}</p>
+                <a class="btn btn-link text-success solve">Resoudre</a>
+               </div>
+            </div>
 
-<div class="card mb-2">
-  <div class="card-body">
-    <h5 class="card-title">Exo1</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a class="btn btn-link text-success solve">Resoudre</a>
-  </div>
-</div>
-
-<div class="card mb-2">
-  <div class="card-body">
-    <h5 class="card-title">Exo1</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a class="btn btn-link text-success solve">Resoudre</a>
-  </div>
-</div>
+          {% endfor %}
 
 
-{# end liste des exeerccice#}
-
-
-       </div>
-       </div>
-        {#---#}
-
-         {#cour#}
-       <div class="card mb-1">
-       <h5 class="card-header text-center">Cours 1</h5>
-       <div class="card-body">
-        <p class="card-text">discription</p>
-
-
-{# liste des exeerccice#}
-
-<div class="card mb-2">
-  <div class="card-body">
-    <h5 class="card-title">Exo1</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a class="btn btn-link text-success solve">Resoudre</a>
-  </div>
-</div>
-
-
-
-{# end liste des exeerccice#}
-
-       </div>
-       </div>
-        {#---#}
-
-          
-      {#           #}
+        
       </div>
-  </div>
+    </div>   
+       {% endfor %}
 
- {#-----------------------#}
+      </div>
+    </div>
+      
 
  {# PANEL#}
 
-  <div class="card mt-2">
+  <div class="card mt-2 mb-2">
     <div class="card-body">
       <h5 class="card-title text-muted text-center">AUTRES COURS</h5>
 
+       {% for cours in  cours_non_suivie %}
+          
 
+       <div class="card mb-1 shadow rounded">
+          <h5 class="card-header text-center">{{cours.nom}}</h5>
+        <div class="card-body">
+          <p class="index d-none">{{cours.id}}</p>
+          <p class="card-text">{{cours.contenu}}</p>
 
-     {#cour#}
-       <div class="card mb-1">
-       <h5 class="card-header text-center">Cours 1</h5>
-       <div class="card-body">
-        <p class="card-text">discription</p>
-        <a href="#" class="btn btn-primary " style="background-color: rgb(41, 133, 194);">Suive</a>
+          <form action="/suivrecour" method="POST"> 
+            <input type="hidden" name="cours_id" value="{{cours.id}}"> 
+            <input type="hidden" name="etudiant_id" value="1"> 
+          
+            <button type="submit" class="btn btn-primary " style="background-color: rgb(41, 133, 194);">Suive</a>
+          </form>
+          </div>
        </div>
-       </div>
-        {#---#}
 
-         {#cour#}
-       <div class="card mb-1">
-       <h5 class="card-header text-center">Cours 1</h5>
-       <div class="card-body">
-        <p class="card-text">discription</p>
-        <a href="#" class="btn btn-primary  " style="background-color: rgb(41, 133, 194);">Suive</a>
-       </div>
-       </div>
-        {#---#}
+       {% endfor %}
+
+     
+
+    
 
 
 
@@ -180,38 +150,14 @@
       </div>
 
      {# Modal body #}
+<input id="idexo" type="hidden"/>
 <div class="modal-body" id="listins">
 
-  {# exercice list #}
-
-<div class="alert alert-secondary my-1"> 
-<div class="row">
-  <div class="col-11"> 
-    <p class="mb-0 instru"> int i =0;</p> 
-  </div> 
-  <div class="col-1">
-   <p class="mb-0 rang"> 1 </p> 
-  </div>
-</div> 
-</div>
-
-
-<div class="alert alert-secondary my-1"> 
-<div class="row">
-  <div class="col-11"> 
-    <p class="mb-0 instru"> int i =0;</p> 
-  </div> 
-  <div class="col-1">
-   <p class="mb-0 rang"> 1 </p> 
-  </div>
-</div> 
-</div>
-
-  {# end exercice list #}
+  
+ 
         
  </div>
-      {# end Modal body #}   
-{# Modal footter #}
+   
   <div class="modal-footer justify-content-between ">
              
       <div class="form-group row w-100">
@@ -243,22 +189,99 @@
    $( function() {
     $( "#listins" ).sortable({
     stop: function() {
-      console.log('current order');
-      var kids = $("#navstat").children().each(function () {
-        
-      //console.log(this.id); // "this" is the current element in the loop
-                              });
       
-    }
-})
+              }
+               })
 
   } );
 
   $('.solve').click(function(){
+     var id=$(this).parent().find('.indexcours').text();
+
+     $("#idexo").val(id);
+     $("#listins").empty();
+
+     $.ajax({
+
+    url : '/getinstruction',
+    type : 'POST',
+    data : {   'id' : id },
+    dataType:'json',
+    success : function(data) {    
+      var mes_instructions=jQuery.parseJSON( data );
+      $.each(mes_instructions, function(i, instru) {
+
+          var alert=jQuery(' <div class="alert alert-secondary my-1"></div>');
+          var row=jQuery('<div class="row"></div>');
+          var col=jQuery('<div class="col-12"></div>');
+          var p_instru=jQuery('<p class="mb-0 instru"></p>');
+          var vrais_ordre=jQuery('<p class="d-none vraisodre"></p>');
+          p_instru.text(instru.contenu);
+          vrais_ordre.text(instru.ordreVrai);
+          col.append([p_instru,vrais_ordre]);
+          row.append(col);
+          alert.append(row);
+          $("#listins").append(alert);
+
+      });
+
+
+
+    },
+    error : function(request,error)
+    {
+        alert("Failed ajax");
+    }
+   });
 
    $('#solveexe').modal('show');
 
   });
+
+  $("#valider").click(function(){
+       var exo=parseInt($("#idexo").val());
+       var instructions = $("#listins").find('.vraisodre');
+       var solution=1;
+       $.each(instructions, function(i) {
+         var ordre=parseInt($(this).text());
+         if(ordre!=i+1)
+         {
+               solution=0;
+               $(this).parent().parent().parent().addClass("alert-danger");
+
+         } else
+         {
+               $(this).parent().parent().parent().removeClass("alert-danger");
+
+         }
+         
+       });
+
+
+ $.ajax({
+
+    url : '/tentative',
+    type : 'POST',
+    data : { 'exo' : exo ,'etu':1,'resulat':solution},
+    dataType:'json',
+    success : function(data) {              
+        alert(data);
+    },
+    error : function(request,error)
+    {
+        alert("Failed AJAX");
+    }
+});
+
+
+      
+       console.log(solution);
+
+
+
+  });
+
+
  </script>
 {% endblock %}
     

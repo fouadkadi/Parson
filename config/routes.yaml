@@ -11,22 +11,61 @@ ensmainpage:
 
 new cours:
    path: /newcours
-   controller: App\Controller\controler::loadnewcours   
+   controller: App\Controller\controler::loadnewcours 
+   methods: POST    
+  
 stats:
    path: /statsens
    controller: App\Controller\controler::loadstatsens
+   methods: POST    
+
+
 etumainpage:
    path: /etu
    controller: App\Controller\controler::loadetumainpage
+    
+
 newcoursetu:
    path: /newcoursetu
-   controller: App\Controller\controler::loadnewcoursetu   
+   controller: App\Controller\controler::loadnewcoursetu  
+   methods: POST    
+
+
 statsetu:
    path: /statsetu
-   controller: App\Controller\controler::loadstatsetu   
+   controller: App\Controller\controler::loadstatsetu 
+   methods: POST    
+
+     
 
 ajouteexe:
    path: /addexe
-   controller: App\Controller\controler::addexe    
+   controller: App\Controller\controler::addexe  
+   methods: POST    
+
+ajoutercour:
+   path: /addcours
+   controller: App\Controller\controler::addcours
+   methods: POST     
+
+showexe:
+   path: /showexercice
+   controller: App\Controller\controler::showexe
+   methods: POST   
+
+suivrecour:
+   path: /suivrecour
+   controller: App\Controller\controler::suivrecours
+   methods: POST 
+
+charinstru:
+   path: /getinstruction
+   controller: App\Controller\controler::getinstur
+   methods: POST   
+
+gettentative:
+   path: /tentative
+   controller: App\Controller\controler::savetentative
+   methods: POST          
 
 
