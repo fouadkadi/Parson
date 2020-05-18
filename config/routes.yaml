@@ -1,15 +1,11 @@
-index:
-   path: /home
-   controller: App\Controller\controler::loadhomepage
-register:
-   path: /register
-   controller: App\Controller\controler::loadregister
 
 ensmainpage:
    path: /ens
    controller:  App\Controller\controler::loadensmainpage
+   methods: POST    
 
-new cours:
+
+new_cours:
    path: /newcours
    controller: App\Controller\controler::loadnewcours 
    methods: POST    
@@ -23,7 +19,8 @@ stats:
 etumainpage:
    path: /etu
    controller: App\Controller\controler::loadetumainpage
-    
+   methods: POST    
+
 
 newcoursetu:
    path: /newcoursetu
@@ -67,5 +64,3 @@ gettentative:
    path: /tentative
    controller: App\Controller\controler::savetentative
    methods: POST          
-
-

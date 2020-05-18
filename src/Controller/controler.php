@@ -41,15 +41,20 @@ class controler extends AbstractController
      */
 
     public function loadensmainpage()
-    {
+    {   
+        $user=$this->getUser();
+
+        $mes_prof_repo = $this->getDoctrine()->getRepository(Profs::class);
+        $mon_prof= ($mes_prof_repo->findBy(['user' => $user]))[0];
+
         $mes_cours_repo = $this->getDoctrine()->getRepository(Cours::class);
-        $mes_cours= $mes_cours_repo->findBy(['prof' => 1]);
+        $mes_cours= $mes_cours_repo->findBy(['prof' => $mon_prof]);
 
         $nb_exo=0;
         foreach($mes_cours as $cours){
             $nb_exo+=count($cours->getExos());
         }
-        return $this->render('ens/ensmainpage.html.twig',['nb_cours' => count($mes_cours),'nb_exos'=> $nb_exo]);
+        return $this->render('ens/ensmainpage.html.twig',['nb_cours' => count($mes_cours),'nb_exos'=> $nb_exo,'prof'=>$mon_prof]);
     }
 
     /**
@@ -62,17 +67,24 @@ class controler extends AbstractController
     {  
          $id_prof=$request->request->get('id_prof');
 
+         $mes_prof_repo = $this->getDoctrine()->getRepository(Profs::class);
+         $mon_prof= $mes_prof_repo->find((int)$id_prof);
+
+
         $mes_cours_repo = $this->getDoctrine()->getRepository(Cours::class);
         $mes_cours= $mes_cours_repo->findBy(['prof' => (int)$id_prof]);
 
-        return $this->render('ens/newcours.html.twig',['mes_cours' => $mes_cours,'id_prof'=>$id_prof]);
+        return $this->render('ens/newcours.html.twig',['mes_cours' => $mes_cours,'prof'=>$mon_prof]);
     } 
 
     public function loadstatsens(Request $request)
     {   $id_prof=$request->request->get('id_prof');
 
+        $mes_prof_repo = $this->getDoctrine()->getRepository(Profs::class);
+        $mon_prof= $mes_prof_repo->find((int)$id_prof);
+
         $mes_cours_repo = $this->getDoctrine()->getRepository(Cours::class);
-        $mes_cours= $mes_cours_repo->findBy(['prof' => (int)$id_prof]);
+        $mes_cours=  $mes_cours_repo->findBy(['prof' => (int)$id_prof]);
 
         $mes_etudiant_repo = $this->getDoctrine()->getRepository(Etudiants::class);
         $mes_etudiants= $mes_etudiant_repo->findAll();
@@ -81,7 +93,7 @@ class controler extends AbstractController
 
 
         return $this->render('ens/statsens.html.twig',['mes_cours' =>$mes_cours,
-                                                       'id_prof'=>$id_prof,
+                                                       'prof'=>$mon_prof,
                                                        'liste_etu'=>$mes_etudiants]);
     }
    
@@ -93,13 +105,14 @@ class controler extends AbstractController
 
     public function loadetumainpage()
     {
+        $user=$this->getUser();
         $mes_etudiant_repo = $this->getDoctrine()->getRepository(Etudiants::class);
-        $mon_etudiant= $mes_etudiant_repo->findBy(['id' => 1]);
+        $mon_etudiant= $mes_etudiant_repo->findBy(['user' => $user]);
         $mes_cours=$mon_etudiant[0]->getCours();
         $mes_tentative=$mon_etudiant[0]->getReponses();
 
 
-        return $this->render('etu/etumainpage.html.twig',['nb_cours' => count($mes_cours),'nb_exos'=> count($mes_tentative)]);
+        return $this->render('etu/etumainpage.html.twig',['nb_cours' => count($mes_cours),'nb_exos'=> count($mes_tentative),'etud'=>$mon_etudiant[0]]);
     }
      
  
@@ -128,7 +141,9 @@ class controler extends AbstractController
         $diff=array_diff($mes_cours,$mes_cours_inscri->toArray());
         $cours_non_suivie=new ArrayCollection($diff);
 
-        return $this->render('etu/newcoursetu.html.twig',['cours_non_suivie' =>$cours_non_suivie ,'cours_suivie'=>$mes_cours_inscri,'id_etu'=>$id_etu]);
+        return $this->render('etu/newcoursetu.html.twig',['cours_non_suivie' =>$cours_non_suivie ,
+                                                          'cours_suivie'=>$mes_cours_inscri,
+                                                          'etud'=>$mon_etu]);
         
     }
 
@@ -143,11 +158,12 @@ class controler extends AbstractController
         $mes_responses_repo = $this->getDoctrine()->getRepository(Reponses::class);
         $mes_reponse_vrais= $mes_responses_repo->findBy(['etudiant' => $mon_etudiant ,'note' =>1]);
 
-        $mes_reponses=$mes_responses_repo->findAll();
+        $mes_reponses=$mon_etudiant->getReponses();
 
         
         $note=0;
-
+        $dernier_exo_r="";
+        $dernier_exo_t="";
         if(!empty($mes_reponse_vrais) && !empty($mes_reponses) ){
 
         //------------ calcule de la note    
@@ -157,13 +173,14 @@ class controler extends AbstractController
         $dernier_exo_t=$mes_reponses[count($mes_reponses)-1]->getExo()->getTitre();
 
         $note=round($note,2)*10;
+        
           }
 
         
         
         $mes_cours=$mon_etudiant->getCours();
         return $this->render('etu/statsetu.html.twig',['total_resolue' =>count($mes_reponse_vrais),
-                                                       'id_etu'=>$id_etu,
+                                                       'etud'=>$mon_etudiant,
                                                        'note'=>$note,
                                                        'dernier_exo_r'=>$dernier_exo_r,
                                                        'dernier_exo_t'=>$dernier_exo_t,
@@ -180,6 +197,7 @@ class controler extends AbstractController
     public function addcours(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
+
         $id_prof = $request->request->get('id_prof');
         $titre = $request->request->get('titre');
         $discription = $request->request->get('discription');
@@ -200,8 +218,8 @@ class controler extends AbstractController
         $entityManager->flush();
 
         $mes_cours_repo = $this->getDoctrine()->getRepository(Cours::class);
-        $mes_cours= $mes_cours_repo->findBy(['prof' => 1]);
-        return $this->render('ens/newcours.html.twig',['mes_cours' => $mes_cours,'id_prof'=>1]);
+        $mes_cours= $mes_cours_repo->findBy(['prof' => $id_prof]);
+        return $this->render('ens/newcours.html.twig',['mes_cours' => $mes_cours,'prof'=>$mon_prof[0]]);
 
 
     }
@@ -234,7 +252,9 @@ class controler extends AbstractController
         $diff=array_diff($mes_cours,$mes_cours_inscri->toArray());
         $cours_non_suivie=new ArrayCollection($diff);
 
-        return $this->render('etu/newcoursetu.html.twig',['cours_non_suivie' =>$cours_non_suivie ,'cours_suivie'=>$mes_cours_inscri]);
+        return $this->render('etu/newcoursetu.html.twig',['cours_non_suivie' =>$cours_non_suivie ,
+                                                          'cours_suivie'=>$mes_cours_inscri,
+                                                          'etud'=>$mon_etudiant]);
 
     }
 
@@ -385,11 +405,18 @@ class controler extends AbstractController
             $resultat=  $request->request->get('resulat');
 
             $mon_exo_repo = $this->getDoctrine()->getRepository(Exos::class);
-            $mon_exo= $mon_exo_repo->find($exo_id);
+            $mon_exo= $mon_exo_repo->find((int)$exo_id);
 
             $mon_etu_repo = $this->getDoctrine()->getRepository(Etudiants::class);
-            $mon_etu= $mon_etu_repo->find($etu_id);
+            $mon_etu= $mon_etu_repo->find((int)$etu_id);
 
+            $mes_reponses_repo = $this->getDoctrine()->getRepository(Reponses::class);
+            $mes_rep= $mes_reponses_repo->findBy(['etudiant' =>$mon_etu ,
+                                                  'exo'=>$mon_etu,
+                                                  'note'=>1]);
+
+           if(count($mes_rep)>1)
+           {
             $reponse=new Reponses();
             $reponse->setNote($resultat);
             $reponse->setExo($mon_exo);
@@ -397,6 +424,7 @@ class controler extends AbstractController
 
             $entityManager->persist($reponse);
             $entityManager->flush();
+            } 
             $message="";
 
             if($resultat){$message=" Tentative sauvgardé bravo pour la solution";}

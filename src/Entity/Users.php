@@ -12,8 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
  * @UniqueEntity(
- * fields = {"email"},
- * message = "email existe deja ")
+ * fields = {"nom"},
+ * message = "nom existe deja ")
  */
 class Users implements UserInterface
 {
@@ -29,16 +29,7 @@ class Users implements UserInterface
      */
     private $nom;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $prenom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Email()
-     */
-    private $email;
+    
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -51,9 +42,11 @@ class Users implements UserInterface
     public $confirm_password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
     private $type;
+
+  
 
     public function getId(): ?int
     {
@@ -71,31 +64,7 @@ class Users implements UserInterface
 
         return $this;
     }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
+    
     public function getPassword(): ?string
     {
         return $this->password;
@@ -113,20 +82,21 @@ class Users implements UserInterface
         return ['role'];
     }
     public function getUsername(){
-        return $this->email;
+        return $this->nom;
     }
 
-    public function getType(): ?string
+    public function getType(): ?bool
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(bool $type): self
     {
         $this->type = $type;
 
         return $this;
     }
+
 
    
 }

@@ -24,7 +24,7 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <form method="POST">
 
-      <input type="hidden" name="id_etu" value="1">
+      <input type="hidden" name="id_etu" value="{{etud.id}}">
 
     <ul class="navbar-nav">
 
@@ -50,10 +50,10 @@
 
   </form>
     <form class="form-inline ml-auto mr-2 my-lg-0">
-     <a class="nav-link text-white" href="/home" >
-         User 124 
+     <button class="nav-link btn btn-link text-white" formaction="{{ path('security_deconn') }}" >
+         {{etud.nom}}
         <span class="ml-1"><i class="fas fa-power-off"></i></span>
-       </a>
+       </button>
     </form>
   </div>
 </nav>

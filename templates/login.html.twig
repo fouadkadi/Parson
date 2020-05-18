@@ -22,8 +22,8 @@
 
     <form class="form-inline ml-auto mr-2 my-2 my-lg-0">
 
-	  <button class="btn btn-outline-info my-2 my-sm-0" type="submit" formaction="/home">Login</button>
-      <button class="btn btn-outline-info ml-2 my-2 my-sm-0" type="submit" formaction="/register">Register</button>
+	  <button class="btn btn-outline-info my-2 my-sm-0" type="submit" formaction="/">Login</button>
+      <button class="btn btn-outline-info ml-2 my-2 my-sm-0" type="submit" formaction="/inscription">Register</button>
 
     </form>
   </div>
@@ -41,33 +41,24 @@
 				<h3> Bienvenue </h3>	
 			</div>
 			<div class="card-body">
-				<form>
+            <form action="{{ path('security_conn') }}" method="post">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username">
+						<input type="text" class="form-control" id="username" name="_username"  placeholder="username">
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password">
+						<input type="password" id="password" name="_password" class="form-control" placeholder="password">
 					</div>
-					<div class="form-group">
-
-                
-                  <div class="form-check">
-                   <input class="form-check-input" type="checkbox" id="gridCheck">
-                   <label class="form-check-label text-white" for="gridCheck">
-                     Je suis enseignant
-                   </label>
-                   </div>
-                 </div>
+				
 
 
-					<div class="form-group">
+					<div class="form-group mt-3">
 						<input type="submit" value="Login" class="btn float-right btn-costom text-white">
 					</div>
                     
@@ -75,7 +66,7 @@
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center">
-					<p>{{ content }} <p> 
+					{# <p>{{ content }} <p>  #}
 				</div>
 			</div>
 		</div>

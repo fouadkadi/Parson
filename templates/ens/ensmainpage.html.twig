@@ -25,7 +25,7 @@
    
    <form method="POST">
 
-      <input type="hidden" name="id_prof" value="1">
+      <input type="hidden" name="id_prof" value="{{prof.id}}">
 
     <ul class="navbar-nav">
 
@@ -52,10 +52,10 @@
   </form>
 
     <form class="form-inline ml-auto mr-2 my-lg-0">
-     <a class="nav-link text-white" href="/home" >
-         User 124 
+     <button class="nav-link btn btn-link text-white" formaction="{{ path('security_deconn') }}" >
+         {{prof.nom}}
         <span class="ml-1"><i class="fas fa-power-off"></i></span>
-       </a>
+       </button>
     </form>
   </div>
 </nav>
