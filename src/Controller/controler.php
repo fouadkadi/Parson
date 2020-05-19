@@ -412,10 +412,10 @@ class controler extends AbstractController
 
             $mes_reponses_repo = $this->getDoctrine()->getRepository(Reponses::class);
             $mes_rep= $mes_reponses_repo->findBy(['etudiant' =>$mon_etu ,
-                                                  'exo'=>$mon_etu,
+                                                  'exo'=>$mon_exo,
                                                   'note'=>1]);
 
-           if(count($mes_rep)>1)
+           if(count($mes_rep)<1)
            {
             $reponse=new Reponses();
             $reponse->setNote($resultat);
