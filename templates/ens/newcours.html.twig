@@ -264,7 +264,7 @@ $("#listins").empty();
 });
 
 
-//------------------------ valider l'ajour d'un fichier 
+//------------------------ valider l'ajour d'un exercice 
 
 $("#valider").click(function() {
     var nodes=[];
@@ -351,6 +351,8 @@ $.ajax({
     data: {crous_id:coursid},
     success: function (data, dataType) {
        var received_data=jQuery.parseJSON( data );
+       
+                $("#exolist").empty();
 
        $.each(received_data.exos, function(i, exo) {
             var card=jQuery('<div class="card mb-2"></div>');
